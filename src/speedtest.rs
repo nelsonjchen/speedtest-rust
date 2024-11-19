@@ -7,11 +7,7 @@ use std::{
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
-#[cfg(feature = "log")]
-use log::info;
-
-#[cfg(not(feature = "log"))]
-use super::log::info;
+use tracing::info;
 
 use reqwest::blocking::{Body, Client, Request, Response};
 use reqwest::header::{HeaderValue, CONNECTION, CONTENT_TYPE, REFERER, USER_AGENT};
@@ -404,7 +400,7 @@ pub struct SpeedTestResult<'a, 'b, 'c> {
     pub latency_measurement: &'c SpeedTestLatencyTestResult<'c>,
 }
 
-impl<'a, 'b, 'c> SpeedTestResult<'a, 'b, 'c> {
+impl SpeedTestResult<'_, '_, '_> {
     pub fn hash(&self) -> String {
         let hashed_str = format!(
             "{}-{}-{}-{}",

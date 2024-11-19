@@ -24,7 +24,7 @@ pub struct SpeedTestCsvResult<'a> {
     pub ip_address: &'a str,
 }
 
-impl<'a> SpeedTestCsvResult<'a> {
+impl SpeedTestCsvResult<'_> {
     pub fn header_serialize(self) -> String {
         // Un-dynamic for now
         // Blocked on:
